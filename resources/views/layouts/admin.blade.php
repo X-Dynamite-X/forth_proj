@@ -16,8 +16,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- @vite('resources/css/app.css') --}}
+
+
     @yield('css')
+
+    <style>
+        /* #rolesLink:active {
+            background-color: blue;
+
+        }
+        #permissionsLink:active {
+            background-color: green;
+        } */
+        .active {
+    background-color: #d1d5db !important; /* لون الخلفية عند النقر */
+    color: #000 !important; /* لون النص عند النقر */
+}
+    .hover_color_link:hover
+    {
+        background-color: #777;
+        color: #000;
+    }
+    </style>
 </head>
 
 <body>
@@ -29,7 +49,7 @@
 
 
     <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
-        @include("layouts.admin_nav")
+        @include('layouts.admin_nav')
         <main class=" flex w-full bg-slate-500">
             <div class=" flex w-full ">
 
@@ -39,20 +59,33 @@
         {{-- </div> --}}
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
 
-        <script>
-            // var baner_message = "<?php echo @include('layouts.message'); ?>";
-            var baner_message = `@include('layouts.message')`;
+    <script>
+        var baner_message = `@include('layouts.message')`;
+    </script>
+    <script>
+       $(document).ready(function() {
+    // تحديد المسار الحالي
+    var currentPath = window.location.pathname;
 
-        </script>
+    // تحديد الرابط الذي يحتوي على ال path الحالي وتغيير لونه
+    if (currentPath.includes("admin/roles")) {
+        $("#rolesLink").addClass("active");
+    } else if (currentPath.includes("admin/permissions")) {
+        $("#permissionsLink").addClass("active");
+    }
+});
 
+    </script>
     @yield('js')
 
 </body>
