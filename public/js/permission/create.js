@@ -15,11 +15,11 @@ $(document).ready(function () {
                 var data = data.data;
                 console.log(message);
                 $("#messageContainer").html(baner_message);
-            $("#json_message").html(message);
-            setTimeout(function () {
-                $("#messageContainer").empty();
-                $("#json_message").empty();
-            }, 3000);
+                $("#json_message").html(message);
+                setTimeout(function () {
+                    $("#messageContainer").empty();
+                    $("#json_message").empty();
+                }, 3000);
 
                 var ajax_code_create_row = ` <tr id="tr${data.id}">
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -80,7 +80,7 @@ $(document).ready(function () {
                                             <div class="mt-1">
                                                 <input type="text" id="permissions" name="name"  value="${data.name}"
                                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                                <div id="error_message_edit_permission"></div>
+                                                <div id="error_message_edit_permission${data.id}"></div>
                                             </div>
                                         </div>
                                         <div class="sm:col-span-6 pt-5">
@@ -101,7 +101,7 @@ $(document).ready(function () {
                 </div>
                 `;
 
-                $("#mymodel").append(create_model_permission_edit);
+                $("#edit_model").append(create_model_permission_edit);
 
                 var create_model_permission_delete = `<div class="modal fade" id="deletePermissionsModal${data.id}" tabindex="-1" aria-labelledby="deletePermissionsModal${data.id}Label" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -138,9 +138,11 @@ $(document).ready(function () {
                                     </div>
                                 </div>
                         </div>`;
-                $("#mymodel").append(create_model_permission_delete);
-            $(`#createPermissionsModal`).modal("hide");
-
+                $("#delete_model").append(create_model_permission_delete);
+                $("#createPermissionsModal").on("hidden.bs.modal", function () {
+                    $(".modal-backdrop").remove();
+                });
+                $("#createPermissionsModal").modal("hide");
             },
             error: function (data) {
                 console.log(data.responseJSON.message);

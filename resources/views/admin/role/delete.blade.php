@@ -1,9 +1,9 @@
 
-<div class="modal fade" id="deleterolesModal{{$role->id}}" tabindex="-1" aria-labelledby="deleterolesModal{{$role->id}}Label" aria-hidden="true">
+<div class="modal fade" id="deleteRolesModal{{$role->id}}" tabindex="-1" aria-labelledby="deleteRolesModal{{$role->id}}Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleterolesModal{{$role->id}}Label">Delete  roles </h1>
+                <h1 class="modal-title fs-5" id="deleteRolesModal{{$role->id}}Label">Delete  roles </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

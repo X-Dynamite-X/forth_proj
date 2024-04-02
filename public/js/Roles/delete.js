@@ -15,7 +15,7 @@ $(document).on("click", ".delete_roles", function () {
             console.log("Success:", data);
             $("#tr" + id).remove();
             var message = data.message;
-            
+
 
             $("#messageContainer").html(baner_message);
             $("#json_message").html(message);
@@ -23,8 +23,10 @@ $(document).on("click", ".delete_roles", function () {
                 $("#messageContainer").empty();
                 $("#json_message").empty();
             }, 3000);
-            $(`#deleterolesModal${id}`).modal("hide");
-
+            $("#deleteRolesModal"+id).on("hidden.bs.modal", function () {
+                $(".modal-backdrop").remove();
+            });
+            $("#deleteRolesModal"+id).modal("hide");
         },
         error: function (data) {
             console.log("Error:", data);

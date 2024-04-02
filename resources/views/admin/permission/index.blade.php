@@ -25,7 +25,7 @@
                 </thead>
                 <tbody class="bg-slate-300 divide-y divide-gray-200" id="tbody">
                     @foreach ($permissions as $permission)
-                        <tr id="tr{{$permission->id}}">
+                        <tr id="tr{{ $permission->id }}">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="ml-4">
@@ -40,14 +40,17 @@
                                     <div class="ml-4">
                                         <div class="space-x-2 justify-end">
                                             <button type="button" id="edit_permission{{ $permission->id }}"
-                                                data-bs-toggle="modal" data-bs-target="#editPermissionsModal{{ $permission->id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editPermissionsModal{{ $permission->id }}"
                                                 class=" bg-yellow-500 hover:bg-yellow-700  rounded-md px-4 text-slate-50  py-2"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                                     <path
                                                         d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
                                                 </svg></button>
-                                            <button type="button" id="delete_permissions{{ $permission->id }}"  data-bs-toggle="modal" data-bs-target="#deletePermissionsModal{{ $permission->id }}"
+                                            <button type="button" id="delete_permissions{{ $permission->id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deletePermissionsModal{{ $permission->id }}"
                                                 class=" bg-red-500 delete_permissions hover:bg-red-700  rounded-md px-4 text-slate-50  py-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -64,29 +67,28 @@
                 </tbody>
             </table>
             <div id="mymodel">
-                @foreach ($permissions as $permission)
-                @include('admin.permission.edit')
-                @include('admin.permission.delete')
-
-            @endforeach
-
-
-
+                <div id="edit_model">
+                    @foreach ($permissions as $permission)
+                        @include('admin.permission.edit')
+                    @endforeach
+                </div>
+                <div id="delete_model">
+                    @foreach ($permissions as $permission)
+                        @include('admin.permission.delete')
+                    @endforeach
+                </div>
+            </div>
         </div>
-    </div>
-    @include('admin.permission.create')
+        @include('admin.permission.create')
+    @endsection
+    @section('js')
+        <script>
+            var edit_permission_rote = "{{ route('admin.permissions.update', '') }}";
+            var delete_permission_rote = "{{ route('admin.permissions.destroy', '') }}"
+        </script>
+        <script src="{{ asset('js/permission/create.js') }}"></script>
+        {{-- <script src="{{ asset('js/permission/add_html_create/create_new_tr_permission.js') }}"></script> --}}
 
-@endsection
-@section('js')
-<script>
-       var edit_permission_rote = "{{ route('admin.permissions.update','') }}";
-       var delete_permission_rote ="{{ route('admin.permissions.destroy','') }}"
-
-    </script>
-    <script src="{{ asset('js/permission/create.js') }}"></script>
-    {{-- <script src="{{ asset('js/permission/add_html_create/create_new_tr_permission.js') }}"></script> --}}
-
-    <script src="{{ asset('js/permission/edit.js') }}"></script>
-    <script src="{{ asset('js/permission/delete.js') }}"></script>
-
-@endsection("js")
+        <script src="{{ asset('js/permission/edit.js') }}"></script>
+        <script src="{{ asset('js/permission/delete.js') }}"></script>
+    @endsection("js")

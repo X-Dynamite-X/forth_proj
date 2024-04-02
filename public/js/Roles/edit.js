@@ -14,7 +14,6 @@ $(document).on("click", ".edit_role", function () {
             $(`#roleName${id}`).text(data.data.name);
             console.log("done");
             var message = data.message;
-            $(`#editRoleModal${id}`).modal("hide");
 
             $("#messageContainer").html(baner_message);
             $("#json_message").html(message);
@@ -22,19 +21,21 @@ $(document).on("click", ".edit_role", function () {
                 $("#messageContainer").empty();
                 $("#json_message").empty();
             }, 3000);
-
+            $("#editRoleModal"+id).on("hidden.bs.modal", function () {
+                $(".modal-backdrop").remove();
+            });
+            $("#editRoleModal"+id).modal("hide");
         },
 
         error: function (data) {
             console.log(data.responseJSON.message);
             var errorMessage = data.responseJSON.message;
-            var errorElement = document.getElementById(
-                "error_message_edit_role"
-            );
+            var errorElement = document.getElementById("error_message_edit_role"+id);
             errorElement.innerHTML =
                 '<span class="text-red-400 text-sm">' +
                 errorMessage +
                 "</span>";
+                console.log(errorMessage);
         },
     });
 });

@@ -14,7 +14,7 @@ $(document).on("click", ".delete_permissions", function () {
             console.log("Success:", data);
             $("#tr" + id).remove();
             var message = data.message;
-            $(`#deletePermissionsModal${id}`).modal("hide");
+
 
             $("#messageContainer").html(baner_message);
             $("#json_message").html(message);
@@ -23,6 +23,10 @@ $(document).on("click", ".delete_permissions", function () {
                 $("#messageContainer").empty();
                 $("#json_message").empty();
             }, 3000);
+            $("#deletePermissionsModal"+id).on("hidden.bs.modal", function () {
+                $(".modal-backdrop").remove();
+            });
+            $("#deletePermissionsModal"+id).modal("hide");
         },
         error: function (data) {
             console.log("Error:", data);
