@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="space-y-8 divide-y divide-gray-200  mt-10">
-                    <form action="{{ route('admin.permissions.update',[$permission->id]) }}" id="form_edete_permissions{{$permission->id}}" method="post">
+                    <form action="{{ route('admin.permissions.update',[$permission->id]) }}" id="form_edit_permissions{{$permission->id}}" method="post">
                         @csrf
                         @method('PUT')
 

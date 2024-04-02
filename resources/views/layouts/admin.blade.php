@@ -148,6 +148,8 @@
         crossorigin="anonymous"></script>
 
         <script>
+                    var csrf_token = "{{ csrf_token() }}";
+
             var baner_message = `@include('layouts.message')`;
         </script>
 

@@ -1,6 +1,7 @@
 $(document).on("click", ".delete_roles", function () {
     var id = $(this).data("id");
-    var form = $("#form_delete_role" + id);
+    var form = $(`#form_delete_role${id}`);
+
 
     $.ajax({
         type: "Delete",
@@ -14,9 +15,15 @@ $(document).on("click", ".delete_roles", function () {
             console.log("Success:", data);
             $("#tr" + id).remove();
             var message = data.message;
-            $('#messageContainer').html(baner_message);
-            $('#json_message').html(message);
-            $(`#deleterolesModa{$id}`).modal("hide");
+            
+
+            $("#messageContainer").html(baner_message);
+            $("#json_message").html(message);
+            setTimeout(function () {
+                $("#messageContainer").empty();
+                $("#json_message").empty();
+            }, 3000);
+            $(`#deleterolesModal${id}`).modal("hide");
 
         },
         error: function (data) {

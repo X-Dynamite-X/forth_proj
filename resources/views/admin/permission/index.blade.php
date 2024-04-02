@@ -23,7 +23,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-slate-300 divide-y divide-gray-200">
+                <tbody class="bg-slate-300 divide-y divide-gray-200" id="tbody">
                     @foreach ($permissions as $permission)
                         <tr id="tr{{$permission->id}}">
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -63,22 +63,30 @@
 
                 </tbody>
             </table>
-            @foreach ($permissions as $permission)
+            <div id="mymodel">
+                @foreach ($permissions as $permission)
                 @include('admin.permission.edit')
                 @include('admin.permission.delete')
 
             @endforeach
 
 
+
         </div>
     </div>
     @include('admin.permission.create')
+
 @endsection
 @section('js')
+<script>
+       var edit_permission_rote = "{{ route('admin.permissions.update','') }}";
+       var delete_permission_rote ="{{ route('admin.permissions.destroy','') }}"
+
+    </script>
     <script src="{{ asset('js/permission/create.js') }}"></script>
+    {{-- <script src="{{ asset('js/permission/add_html_create/create_new_tr_permission.js') }}"></script> --}}
+
     <script src="{{ asset('js/permission/edit.js') }}"></script>
     <script src="{{ asset('js/permission/delete.js') }}"></script>
-    <script>
-        // var ajax_code_create_row = `@include("admin.permission.ajax_code.create_row")`;
-    </script>
+
 @endsection("js")
