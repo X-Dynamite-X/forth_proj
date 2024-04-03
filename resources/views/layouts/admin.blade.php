@@ -21,22 +21,15 @@
     @yield('css')
 
     <style>
-        /* #rolesLink:active {
-            background-color: blue;
-
-        }
-        #permissionsLink:active {
-            background-color: green;
-        } */
         .active {
-    background-color: #d1d5db !important; /* لون الخلفية عند النقر */
-    color: #000 !important; /* لون النص عند النقر */
-}
-    .hover_color_link:hover
-    {
-        background-color: #777;
-        color: #000;
-    }
+            background-color: #d1d5db !important;
+            color: #000 !important;
+        }
+
+        .hover_color_link:hover {
+            background-color: #777;
+            color: #000;
+        }
     </style>
 </head>
 
@@ -68,23 +61,18 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-
     <script>
-        var baner_message = `@include('layouts.message')`;
+        $(document).ready(function() {
+            var currentPath = window.location.pathname;
+            if (currentPath.includes("admin/roles")) {
+                $("#rolesLink").addClass("active");
+            } else if (currentPath.includes("admin/permissions")) {
+                $("#permissionsLink").addClass("active");
+            }
+        });
     </script>
     <script>
-       $(document).ready(function() {
-    // تحديد المسار الحالي
-    var currentPath = window.location.pathname;
-
-    // تحديد الرابط الذي يحتوي على ال path الحالي وتغيير لونه
-    if (currentPath.includes("admin/roles")) {
-        $("#rolesLink").addClass("active");
-    } else if (currentPath.includes("admin/permissions")) {
-        $("#permissionsLink").addClass("active");
-    }
-});
-
+        var baner_message = `@include('layouts.message')`;
     </script>
     @yield('js')
 
