@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -14,7 +15,9 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::all();
-        return view("admin.permission.index", ["permissions" => $permissions]);
+        $roles = Role::all();
+
+        return view("admin.permission.index", ["permissions" => $permissions,"roles"=>$roles]);
     }
 
     /**
@@ -30,7 +33,9 @@ class PermissionController extends Controller
             "name" => ["required", "min:3"],
         ]);
         $permission = Permission::create($validate);
-        return response()->json(["data" => $permission ,"message" => "Create permission is Successfully"]);
+        $roles = Role::all();
+
+        return response()->json(["data" => $permission,'roles'=> $roles ,"message" => "Create permission is Successfully"]);
     }
 
     public function update(Request $request, Permission $permission)
@@ -54,4 +59,34 @@ class PermissionController extends Controller
         return response()->json(["messages"=> "success"  ,"message" => "Delete permission is Successfully"]);
 
     }
+
+
+    public function giveRole(Request $request, Permission  $permission)
+    {
+        if ($permission->hasRole($request->role)) {
+            return  response()->json(['message' => 'this Role  already exist'], 404);
+        }
+        $permission->assignRole($request->role);
+        $data = Role::where('name',  $request->role)->get();
+
+        return response()->json(['data' => $data, 'message' => 'the Role has been assigend'], 201);
+    }
+    public function removeRole(Permission  $permission , Role $role)
+    {
+        if ($permission->hasRole($role)) {
+            $permission->removeRole($role);
+            return  response()->json(['message' => 'Role remove  '], 201);
+        }
+
+        return response()->json(['message' => 'this Role is Note exist '], 404);
+    }
 }
+
+
+
+
+
+
+
+
+

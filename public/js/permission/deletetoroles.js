@@ -1,6 +1,7 @@
-$(document).on("click", ".delete_roles", function () {
+$(document).on("click", ".delete_to_role_in_permission", function () {
     var id = $(this).data("id");
-    var form = $(`#form_delete_role${id}`);
+    console.log(id);
+    var form = $(`#form_delete_to_role_in_permission${id}`);
 
 
     $.ajax({
@@ -15,21 +16,20 @@ $(document).on("click", ".delete_roles", function () {
             console.log("Success:", data);
             $("#tr" + id).remove();
             var message = data.message;
-
-
             $("#messageContainer").html(baner_message);
             $("#json_message").html(message);
             setTimeout(function () {
                 $("#messageContainer").empty();
                 $("#json_message").empty();
             }, 3000);
-            $("#deleteRolesModal"+id).on("hidden.bs.modal", function () {
+            $("#deleteToRoleInPermissonModal"+id).on("hidden.bs.modal", function () {
                 $(".modal-backdrop").remove();
             });
-            $("#deleteRolesModal"+id).modal("hide");
+            $("#deleteToRoleInPermissonModal"+id).modal("hide");
+
         },
         error: function (data) {
-            console.log("Error:\n", data);
+            console.log("Error:", data);
         },
     });
 });

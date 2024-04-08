@@ -38,11 +38,36 @@
                                 <div class="flex items-center">
 
                                     <div class="ml-4">
-                                        <div class="space-x-2 justify-end">
+                                        <div class=" justify-end">
+                                            <button type="button" id="show_to_permisson_in_role{{ $permission->id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#showToRoleInPermissonModal{{ $permission->id }}"
+                                                class=" bg-blue-500 hover:bg-blue-700  rounded-md px-2 text-slate-50  py-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                                                    <path
+                                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                                </svg>
+
+                                            </button>
+                                            <button type="button" id="add_to_permisson_in_role{{ $permission->id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#addToRoleInPermissonModal{{ $permission->id }}"
+                                                class=" bg-green-500 hover:bg-green-700  rounded-md px-2 text-slate-50  py-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                    <path
+                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                </svg>
+                                            </button>
                                             <button type="button" id="edit_permission{{ $permission->id }}"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editPermissionsModal{{ $permission->id }}"
-                                                class=" bg-yellow-500 hover:bg-yellow-700  rounded-md px-4 text-slate-50  py-2"><svg
+                                                class=" bg-yellow-500 hover:bg-yellow-700  rounded-md px-2 text-slate-50  py-2"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                                     <path
@@ -51,7 +76,7 @@
                                             <button type="button" id="delete_permissions{{ $permission->id }}"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#deletePermissionsModal{{ $permission->id }}"
-                                                class=" bg-red-500 delete_permissions hover:bg-red-700  rounded-md px-4 text-slate-50  py-2">
+                                                class=" bg-red-500 delete_permissions hover:bg-red-700  rounded-md px-2 text-slate-50  py-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                     <path
@@ -67,6 +92,23 @@
                 </tbody>
             </table>
             <div id="mymodel">
+                <div id="delete_to_role_in_permission_model">
+                    @foreach ($permissions as $permission)
+                        @foreach ($permission->roles as $permission_role)
+                            @include('admin.permission.deletetorole')
+                        @endforeach
+                    @endforeach
+                </div>
+                <div id="show_to_role_in_permission_model">
+                    @foreach ($permissions as $permission)
+                        @include('admin.permission.showtorole')
+                    @endforeach
+                </div>
+                <div id="add_to_role_in_permission_model">
+                    @foreach ($permissions as $permission)
+                        @include('admin.permission.addtorole')
+                    @endforeach
+                </div>
                 <div id="edit_model">
                     @foreach ($permissions as $permission)
                         @include('admin.permission.edit')
@@ -85,10 +127,12 @@
         <script>
             var edit_permission_rote = "{{ route('admin.permissions.update', '') }}";
             var delete_permission_rote = "{{ route('admin.permissions.destroy', '') }}"
+            var delete_permission_role_rote = "{{ route('admin.removeRole', ['', '']) }}";
+            var add_to_role = "{{ route('admin.giveRole', ['']) }}";
         </script>
         <script src="{{ asset('js/permission/create.js') }}"></script>
-        {{-- <script src="{{ asset('js/permission/add_html_create/create_new_tr_permission.js') }}"></script> --}}
-
         <script src="{{ asset('js/permission/edit.js') }}"></script>
         <script src="{{ asset('js/permission/delete.js') }}"></script>
+        <script src="{{ asset('js/permission/deletetoroles.js') }}"></script>
+        <script src="{{ asset('js/permission/addtorole.js') }}"></script>
     @endsection("js")

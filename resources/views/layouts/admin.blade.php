@@ -73,6 +73,7 @@
     </script>
     <script>
         var baner_message = `@include('layouts.message')`;
+        var csrf_token = "{{ csrf_token() }}";
     </script>
     @yield('js')
 
