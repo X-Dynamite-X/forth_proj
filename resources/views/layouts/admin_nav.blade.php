@@ -18,6 +18,8 @@
             </div>
             <nav :class="{ 'block': open, 'hidden': !open }"
                 class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
+                <a id="UserLink" class="block hover_color_link px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-none rounded-lg dark:model:bg-gray-700 dark:model:hover:bg-gray-600 dark:model:focus:bg-gray-600 dark:model:focus:text-white dark:model:hover:text-white dark:model:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline transition-colors duration-300 text-decoration-none"
+                href="{{ route('admin.usersPage') }}">users</a>
                 <a id="rolesLink" class="block hover_color_link px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-none rounded-lg dark:model:bg-gray-700 dark:model:hover:bg-gray-600 dark:model:focus:bg-gray-600 dark:model:focus:text-white dark:model:hover:text-white dark:model:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline transition-colors duration-300 text-decoration-none"
                 href="{{ route('admin.roles.index') }}">Roles</a>
             <a id="permissionsLink" class=" hover_color_link block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-none rounded-lg dark:model:bg-none dark:model:hover:bg-gray-600 dark:model:focus:bg-gray-600 dark:model:focus:text-white dark:model:hover:text-white dark:model:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline transition-colors duration-300 text-decoration-none"

@@ -1,28 +1,25 @@
-
-<div class="modal fade" id="deleteToRoleInPermissonModal{{$permission->id}}{{$permission_role->id}}" tabindex="-1" aria-labelledby="deleteToRoleInPermissonModal{{$permission->id}}{{$permission_role->id}}Label" aria-hidden="true">
+<div class="modal fade" id="deleteUserModal{{$user->id}}" tabindex="-1" aria-labelledby="deleteUserModal{{$user->id}}Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteToRoleInPermissonModal{{$permission->id}}{{$permission_role->id}}Label">Delete  roles </h1>
+                <h1 class="modal-title fs-5" id="deleteUserModal{{$user->id}}Label">Delete  User </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="space-y-8 divide-y divide-gray-200  mt-10">
-                    <form action="{{ route('admin.removeRole',[$permission->id , $permission_role->id]) }}" id="form_delete_to_role_in_permission{{$permission->id}}{{$permission_role->id}}" method="post">
+                    <form action="{{ route('admin.removeUser',['user'=> $user->id]) }}" id="form_delete_user{{$user->id}}" method="post">
                         @csrf
                         @method('DELETE')
-
                         <div class="sm:col-span-6">
-
                             <div class="mt-1 text-red-700">
-                                Are you sure to delete this Role  {{$permission_role->name}}  ?
+                                Are you sure to delete this User  {{$user->name}}  ?
                             </div>
                         </div>
                         <div class="sm:col-span-6 pt-5">
                             <div class="mt-1">
                                 <div class="modal-footer">
-                                    <button type="button" id="delete_to_role_in_permission{{$permission->id}}{{$permission_role->id}}" data-id="{{$permission->id}}{{$permission_role->id}}"
-                                        class="delete_to_role_in_permission text-slate-50 bg-red-700 hover:bg-red-500 rounded-md px-4 py-2">Delete</button>
+                                    <button type="button" id="delete_user{{$user->id}}" data-id={{$user->id}}
+                                        class="delete_user text-slate-50 bg-red-700 hover:bg-red-500 rounded-md px-4 py-2">Delete</button>
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                 </div>

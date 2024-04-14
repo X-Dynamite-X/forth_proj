@@ -69,6 +69,9 @@
             } else if (currentPath.includes("admin/permissions")) {
                 $("#permissionsLink").addClass("active");
             }
+            else if (currentPath.includes("admin/users")) {
+                $("#UserLink").addClass("active");
+            }
         });
     </script>
     <script>

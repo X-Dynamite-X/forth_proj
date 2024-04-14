@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+
 
 
 /*
@@ -40,6 +42,18 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix("admin")->grou
     Route::resource('/permissions', PermissionController::class);
     Route::post("/permissions/role/{permission}",[PermissionController::class,"giveRole"])->name("giveRole");
     Route::delete("/permissions/role/{permission}/{role}",[PermissionController::class,"removeRole"])->name("removeRole");
+
+    Route::get("/users",[UserController::class,"index"])->name("usersPage");
+    Route::post("/users/permissions/{user}",[UserController::class,"givePermissionToUser"])->name('givePermissionToUser');
+    Route::delete("/users/permissions/delete/{user}/{permission}",[UserController::class,"revokePermissionToUser"])->name("revokePermissionToUser");
+    Route::post("/users/role/{user}",[UserController::class,"giveRoleUser"])->name("giveRoleUser");
+    Route::delete("/users/role/delete/{user}/{role}",[UserController::class,"removeRoleUser"])->name("removeRoleUser");
+
+    Route::post("/users/create",[UserController::class,"store"])->name("createUser");
+    Route::put("/users/edit/{id}",[UserController::class,"update"])->name("editUser");
+
+    Route::delete("/users/delete/{user}",[UserController::class,"destroy"])->name("removeUser");
+
 
 
 });

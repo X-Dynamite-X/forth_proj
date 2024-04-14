@@ -14,17 +14,21 @@ $(document).on("click", ".add_to_role_in_permission", function () {
             var permission_role_id = data.data[0].id;
             console.log(data);
             console.log(name);
-            console.log(permission_role_id);
-            console.log(permission_id);
+            console.log(`permission_role_id=${permission_role_id}`);
+            console.log(`permission_id=${permission_id}`);
+            console.log(`id=${id}`);
+
+
+
 
 
             var ajax_code_create_row_role_to_permission =`
-<tr id="trpermission_id${permission_role_id}">
+<tr id="trpermission_id${id}${permission_role_id}">
         <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center">
                 <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900"
-                        id="permission_rolepermission_id${permission_role_id}">
+                        id="permission_rolepermission_id${id}${permission_role_id}">
                         ${name} </div>
                 </div>
             </div>
@@ -34,9 +38,9 @@ $(document).on("click", ".add_to_role_in_permission", function () {
                 <div class="ml-4">
                     <div class="space-x-2 justify-end">
                         <button type="button"
-                            id="deleteToRoleInPermissonpermission_id${permission_role_id}"
+                            id="deleteToRoleInPermisson${id}${permission_role_id}"
                             data-bs-toggle="modal"
-                            data-bs-target="#deleteToRoleInPermissonModalpermission_id${permission_role_id}"
+                            data-bs-target="#deleteToRoleInPermissonModal${id}${permission_role_id}"
                             class=" bg-red-500 hover:bg-red-700  rounded-md px-2 text-slate-50  py-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-trash3"
@@ -53,11 +57,51 @@ $(document).on("click", ".add_to_role_in_permission", function () {
     </tr>
 
 `;
-
             $("#tbody_permission_to_role"+permission_id).append(
                 ajax_code_create_row_role_to_permission
             );
 
+            var create_model_permission_to_role_delete= `
+            <div class="modal fade" id="deleteToRoleInPermissonModal${id}${permission_role_id}" tabindex="-1" aria-labelledby="deleteToRoleInPermissonModal${id}${permission_role_id}Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteToRoleInPermissonModal${id}${permission_role_id}Label">Delete  roles </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="space-y-8 divide-y divide-gray-200  mt-10">
+                                <form action="${delete_permission_role_rote}/${id}/${permission_role_id}" id="form_delete_to_role_in_permission${id}${permission_role_id}" method="post">
+                                <input type="hidden" name="_token" value="${csrf_token}" autocomplete="off">
+                                <input type="hidden" name="_method" value="delete">
+                                    <div class="sm:col-span-6">
+                                        <div class="mt-1 text-red-700">
+                                            Are you sure to delete this Role  ${name}  ?
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-6 pt-5">
+                                        <div class="mt-1">
+                                            <div class="modal-footer">
+                                                <button type="button" id="delete_to_role_in_permission${id}${permission_role_id}" data-id=${id}${permission_role_id}
+                                                    class="delete_to_role_in_permission text-slate-50 bg-red-700 hover:bg-red-500 rounded-md px-4 py-2">Delete</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            `;
+
+            $("#delete_to_role_in_permission_model").append(
+                create_model_permission_to_role_delete
+            );
 
 
 

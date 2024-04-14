@@ -22,8 +22,7 @@ class RoleController extends Controller
 
 
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $validate = $request->validate([
             "name" => ["required", "min:3"],
         ]);
@@ -32,8 +31,7 @@ class RoleController extends Controller
 
         return response()->json(["data" => $role, 'permissions'=>$permissions,"message" => "Create Role is Successfully"]);
     }
-    public function update(Request $request, Role  $role)
-    {
+    public function update(Request $request, Role  $role){
         $validate = $request->validate([
             "name" => ["required", "min:3"],
         ]);
@@ -45,6 +43,7 @@ class RoleController extends Controller
         $role->delete();
         return response()->json(["message" => "Delete Role is Successfully"]);
     }
+    
     public function givePermission(Request $request, Role  $role)
     {
         if ($role->hasPermissionTo($request->permission)) {
